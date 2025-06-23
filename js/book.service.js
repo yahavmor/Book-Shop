@@ -7,3 +7,4 @@ function getBooks(){
         {id: 'bj5932', title: 'The Great Gatsby', price: 10,imgUrl:'https://example.com/the-great-gatsby.jpg'},
     ]
 }
+

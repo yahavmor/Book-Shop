@@ -1,0 +1,39 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    margin: 5vw;
+    font-family: Arial, sans-serif;
+}
+.book-list {
+    text-align: center;
+}
+
+.header{
+    text-align: center;
+    padding: 20px;
+    background-color: #c3dae0e7;
+}
+.action{
+    font-weight: bold;
+    padding: .4em;
+    cursor: pointer;
+}
+
+.read{
+    border-radius: 8px;
+    background-color: rgb(37, 162, 201);
+    border: none;
+}
+.update{
+    border-radius: 8px;
+    background-color: rgb(219, 206, 21);
+    border: none;
+}
+.delete{
+    border-radius: 8px;
+    background-color: rgb(233, 123, 34);
+    border: none;
+}
