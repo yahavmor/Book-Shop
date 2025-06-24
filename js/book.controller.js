@@ -3,33 +3,37 @@
 function onInit(){
     render()
 }
-
+var gBooks = getBooks();
 function render(){
-        const books = getBooks();
         var strHTMLs = '';
     const elBooks = document.querySelector('.book-list');
-    books.map(book => {
+    gBooks.map(book => {
         strHTMLs += `<tr class="book">
                     <td>${book.title}</td>
                     <td>${book.price}</td>
-                    <td><button class="action read" onclick="onReadBook()">Read</button>
-                     <button class="action update" onclick="onUpdateBook()">update</button> 
-                     <button class="action delete" onclick="onDeleteBook()">delete</button></td>
+                    <td><button class="action read" onclick="onReadBook('${book.id}')">Read</button>
+                     <button class="action update" onclick="onUpdateBook('${book.id}')">update</button> 
+                     <button class="action delete" onclick=" onRemoveBook('${book.id}')">delete</button></td>
                 </tr>`;
     })    
     elBooks.innerHTML = strHTMLs
 }
 
-function onReadBook(){
-    console.log('Reading book...');
+function onReadBook(bookId){
+    readBook(bookId);
+    render();
 
 }
-function onUpdateBook(){
-    console.log('Updating book...');
-    
-
+function onUpdateBook(bookId){
+    updateBook(bookId);
+    render();
 }
-function onDeleteBook(){
-    console.log('Deleting book...');
 
+function onRemoveBook(bookId){
+    removeBook(bookId);
+    render();
+}
+function onAddBook(){
+    addBook();
+    render();
 }

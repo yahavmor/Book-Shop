@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body onload="onInit()">
+    <button class="add-book" onclick="onAddBook()">Add Book</button>
     <table class="book-table">
         <tr class="header">
             <th>Title</th>
@@ -16,6 +17,14 @@
         <tbody class="book-list">
         </tbody>
     </table>
+
+    <dialog class="book-details-modal">
+        <form method="dialog">
+            <h2 class="dialog-title">More Details About The Book</h2>    
+            <pre></pre>
+            <button class="close-modal">X</button>
+        </form>
+    </dialog>
     <script src="js/book.service.js"></script>
     <script src="js/book.controller.js"></script>
 

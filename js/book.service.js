@@ -8,3 +8,57 @@ function getBooks(){
     ]
 }
 
+function createBook(title, price) {
+    const book = {
+        id: makeId(),
+        title,
+        price: +price,
+        imgUrl: `https://example.com/${title}.jpg` 
+    };      
+    gBooks.push(book);
+}
+
+function removeBook(bookId) {
+    const bookIndex = gBooks.findIndex(book => book.id === bookId);
+    gBooks.splice(bookIndex, 1);   
+}
+function updateBook(bookId) {
+    const book = gBooks.find(book => book.id === bookId);
+    const newPrice = +prompt('Enter new price:', book.price);
+    if(isNaN(newPrice)||newPrice < 0){
+        alert('Invalid price. Please enter a valid number greater than or equal to 0.');
+        return
+    }
+    book.price = newPrice; 
+}
+
+function readBook(bookId) {
+    const book = gBooks.find(book => book.id === bookId);
+    const elModal = document.querySelector('.book-dialog');
+    const elDetails = document.querySelector('pre')
+    elDetails.innerHTML = JSON.stringify(book, null, 2);
+    elModal.showModal()
+}
+function addBook() {
+    const title = prompt('Enter book title:');
+    if (!title) {
+        alert('Title cannot be empty');
+        return;
+    }
+    const price = prompt('Enter book price:');
+    if (isNaN(price) || price < 0) {
+        alert('Invalid price. Please enter a valid number greater than or equal to 0.');
+        return;
+    }
+    createBook(title, price);
+
+}
+
+function makeId(){
+    var text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < 6; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+}

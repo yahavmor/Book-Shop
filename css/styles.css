@@ -3,12 +3,21 @@
 }
 
 body {
-    height: 100vh;
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+    flex-direction: row-reverse;
+    height: 80vh;
+    width: 80vw;
+    font-size: 2em;
+
     margin: 5vw;
     font-family: Arial, sans-serif;
 }
-.book-list {
+.book-table {
     text-align: center;
+    height: 40%;
+    width:70%;
 }
 
 .header{
@@ -36,4 +45,22 @@ body {
     border-radius: 8px;
     background-color: rgb(233, 123, 34);
     border: none;
+}
+.add-book{
+    height: 10%;
+    width: 20%;
+    border-radius: 8px;
+    background-color: rgb(34, 233, 123);
+    border: none;
+    cursor: pointer;
+}
+.book-details-modal{ 
+    position: relative;
+}
+.close-modal{
+    position: absolute;
+    top:0;
+    right: 0;
+    font-size: .5em;
+    cursor: pointer;
 }
