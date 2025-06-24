@@ -22,19 +22,14 @@ function removeBook(bookId) {
     const bookIndex = gBooks.findIndex(book => book.id === bookId);
     gBooks.splice(bookIndex, 1);   
 }
-function updateBook(bookId) {
+function updateBook(bookId,newPrice) {
     const book = gBooks.find(book => book.id === bookId);
-    const newPrice = +prompt('Enter new price:', book.price);
-    if(isNaN(newPrice)||newPrice < 0){
-        alert('Invalid price. Please enter a valid number greater than or equal to 0.');
-        return
-    }
     book.price = newPrice; 
 }
 
 function readBook(bookId) {
     const book = gBooks.find(book => book.id === bookId);
-    const elModal = document.querySelector('.book-dialog');
+    const elModal = document.querySelector('.book-details-modal');
     const elDetails = document.querySelector('pre')
     elDetails.innerHTML = JSON.stringify(book, null, 2);
     elModal.showModal()
@@ -62,3 +57,4 @@ function makeId(){
     }
     return text;
 }
+

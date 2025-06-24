@@ -3,18 +3,19 @@
 }
 
 body {
+    height: 80vh;
+    width: 80vw;
     display: flex;
     align-items: center;
     gap: 2vw;
     flex-direction: row-reverse;
-    height: 80vh;
-    width: 80vw;
     font-size: 2em;
-
     margin: 5vw;
     font-family: Arial, sans-serif;
 }
 .book-table {
+    border-collapse: collapse;
+    border: 1px solid black;
     text-align: center;
     height: 40%;
     width:70%;
