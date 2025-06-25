@@ -8,18 +8,23 @@
 </head>
 <body onload="onInit()" onsubmit="">
     
-        <input type="text" placeholder="Search for a book..." oninput="onSearch(this)">
-        <button class="add-book" onclick="onAddBook()">Add Book</button>
-    <table class="book-table">
-        <tr class="header">
-            <th>Title</th>
-            <th>Price</th>
-            <th>Actions</th>
-        </tr>
-        <tbody class="book-list">
-        </tbody>
-    </table>
-
+        <h1 class="header">Book Shop</h1>
+        <div class="container">
+                <div class="filter">
+                <button onclick="onResetSearch()">Reset Search</button>
+                <input class="input" placeholder="Search for a book..." oninput="onSearch(this)">
+                </div>
+            <button class="add-book" onclick="onAddBook()">Add Book</button>
+        <table class="book-table">
+            <tr class="header">
+                <th>Title</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+            <tbody class="book-list">
+            </tbody>
+        </table>        
+        </div>    
     <dialog class="book-details-modal">
         <form method="dialog">
             <h2 class="dialog-title">More Details About The Book</h2>    

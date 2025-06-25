@@ -5,20 +5,32 @@
 body {
     height: 80vh;
     width: 80vw;
-    display: flex;
-    align-items: center;
-    gap: 2vw;
-    flex-direction: row-reverse;
-    font-size: 2em;
+    font-size: 1.5em;
     margin: 5vw;
     font-family: Arial, sans-serif;
 }
+.container{
+    margin: auto;
+    width: 70%;
+    height: 80%;
+    display: grid;
+    grid-template-columns:repeat(2, 1fr);
+    grid-template-rows:  1fr 5fr 5fr ;
+    grid-template-areas: 
+        "filter add "
+        "table table "
+        "table table ";
+    place-items: center;
+
+}
+
 .book-table {
+    grid-area: table;
     border-collapse: collapse;
     border: 1px solid black;
     text-align: center;
-    height: 40%;
-    width:70%;
+    height: 100%;
+    width:100%;
 }
 
 .header{
@@ -48,7 +60,10 @@ body {
     border: none;
 }
 .add-book{
-    height: 10%;
+    place-self:  end center;
+    margin-bottom: 10px;
+    grid-area: add;
+    height: auto;
     width: 20%;
     border-radius: 8px;
     background-color: rgb(34, 233, 123);
@@ -57,6 +72,9 @@ body {
 }
 .book-details-modal{ 
     position: relative;
+    width: 70%;
+    height: 50%;
+    background-color: rgba(195, 218, 224, 23);
 }
 .close-modal{
     position: absolute;
@@ -64,4 +82,23 @@ body {
     right: 0;
     font-size: .5em;
     cursor: pointer;
+}
+.filter{
+    place-self: end center;
+    grid-area: filter;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5em;
+    width: 80%;
+    margin-bottom: 10px;
+}
+.header{
+    grid-area: header;
+}
+.dialog-title{
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 1em;
 }

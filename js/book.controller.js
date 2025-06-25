@@ -66,3 +66,9 @@ function filterBooks(gFilterBy){
     if (!gFilterBy) return gBooks;
     return gBooks.filter(book => book.title.toLowerCase().includes(gFilterBy));  
 }
+function onResetSearch(){
+    resetSearch();
+    clearTextInput();
+
+}
+

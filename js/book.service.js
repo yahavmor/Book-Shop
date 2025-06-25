@@ -57,4 +57,12 @@ function makeId(){
     }
     return text;
 }
-
+function resetSearch(){
+    gFilterBy = ''
+    render(gFilterBy);
+}
+function clearTextInput(){
+    const elInput = document.querySelector('.input');
+    elInput.value = '';
+    elInput.focus();
+}
