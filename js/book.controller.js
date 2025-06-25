@@ -1,10 +1,10 @@
 'use strict';
 
 var gBooks
-
+var gFilterBy = ''
 function onInit(){
     books();
-    render()
+    render(gFilterBy)
 }
 function books(){
     gBooks = loadFromStorage('books');
@@ -14,10 +14,11 @@ function books(){
     }
 }
 
-function render(){
+function render(gFilterBy){
         var strHTMLs = '';
     const elBooks = document.querySelector('.book-list');
-    gBooks.map(book => {
+    const booksToFilter = filterBooks(gFilterBy);
+    booksToFilter.map(book => {
         strHTMLs += `<tr class="book">
                     <td>${book.title}</td>
                     <td>${book.price}</td>
@@ -31,7 +32,7 @@ function render(){
 
 function onReadBook(bookId){
     readBook(bookId);
-    render();
+    render(gFilterBy);
 
 }
 function onUpdateBook(bookId){
@@ -42,16 +43,26 @@ function onUpdateBook(bookId){
     }
     updateBook(bookId,newPrice);   
     saveToStorage('books', gBooks);
-    render();
+    render(gFilterBy);
 }
 
 function onRemoveBook(bookId){
     removeBook(bookId);
     saveToStorage('books', gBooks);
-    render();
+    render(gFilterBy);
 }
 function onAddBook(){
     addBook();
     saveToStorage('books', gBooks);
-    render();
+    render(gFilterBy);
+}
+
+function onSearch(input){
+    gFilterBy = input.value.toLowerCase();
+    render(gFilterBy);
+}
+
+function filterBooks(gFilterBy){
+    if (!gFilterBy) return gBooks;
+    return gBooks.filter(book => book.title.toLowerCase().includes(gFilterBy));  
 }

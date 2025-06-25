@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body onload="onInit()" onsubmit="">
-    <button class="add-book" onclick="onAddBook()">Add Book</button>
+    
+        <input type="text" placeholder="Search for a book..." oninput="onSearch(this)">
+        <button class="add-book" onclick="onAddBook()">Add Book</button>
     <table class="book-table">
         <tr class="header">
             <th>Title</th>
