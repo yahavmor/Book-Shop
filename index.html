@@ -1,40 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Shop</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body onload="onInit()" onsubmit="">
-    
-        <h1 class="header">Book Shop</h1>
-        <div class="container">
-                <div class="filter">
-                <button onclick="onResetSearch()">Reset Search</button>
-                <input class="input" placeholder="Search for a book..." oninput="onSearch(this)">
-                </div>
-            <button class="add-book" onclick="onAddBook()">Add Book</button>
-        <table class="book-table">
-            <tr class="header">
-                <th>Title</th>
-                <th>Price</th>
-                <th>Actions</th>
-            </tr>
-            <tbody class="book-list">
-            </tbody>
-        </table>        
-        </div>    
-    <dialog class="book-details-modal">
-        <form method="dialog">
-            <h2 class="dialog-title">More Details About The Book</h2>    
-            <pre></pre>
-            <button class="close-modal">X</button>
-        </form>
-    </dialog>
-    <script src="js/book.service.js"></script>
-    <script src="js/book.controller.js"></script>
-    <script src="js/local,storage.js"></script>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Book Shop</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body onload="onInit()" onsubmit="">
+        
+            <h1 class="main-header">Book Shop</h1>
 
-</body>
-</html>
+
+
+            <div class="container">
+
+
+                    <div class="filter">
+                    <button onclick="onResetSearch()">Reset Search</button>
+                    <input class="input" placeholder="Search for a book..." oninput="onSearch(this)">
+                    </div>
+
+
+                    <button class="add-book" onclick="onAddBook()">Add Book</button>
+
+
+
+            <table class="book-table">
+                <tr class="table-header">
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+
+
+                <tbody class="book-list">
+                </tbody>
+            </table>        
+            </div>    
+
+
+
+
+        <dialog class="book-details-modal">
+            <form method="dialog">
+                <h2 class="dialog-title">More Details About The Book</h2>    
+                <pre></pre>
+                <button class="close-modal">X</button>
+            </form>
+        </dialog>
+
+
+
+        <div class="message-modal hidden">
+                <p class="message-text"><span class="success-txt">Success</span>  <span2></span2></p>
+        </div>
+
+
+
+        <script src="js/book.service.js"></script>
+        <script src="js/book.controller.js"></script>
+        <script src="js/local,storage.js"></script>
+
+    </body>
+    </html>

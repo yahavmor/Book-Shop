@@ -16,6 +16,7 @@ function createBook(title, price) {
         imgUrl: `https://example.com/${title}.jpg` 
     };      
     gBooks.push(book);
+    showMessage('Book added successfully!');
 }
 
 function removeBook(bookId) {
@@ -25,6 +26,7 @@ function removeBook(bookId) {
 function updateBook(bookId,newPrice) {
     const book = gBooks.find(book => book.id === bookId);
     book.price = newPrice; 
+    showMessage('Book updated successfully!');
 }
 
 function readBook(bookId) {
@@ -46,6 +48,7 @@ function addBook() {
         return;
     }
     createBook(title, price);
+    showMessage('Book added successfully!');
 
 }
 
@@ -65,4 +68,17 @@ function clearTextInput(){
     const elInput = document.querySelector('.input');
     elInput.value = '';
     elInput.focus();
+}
+function showMessage(msg) {
+    const elMessage = document.querySelector('.message-modal'); 
+    elMessage.querySelector('.message-text span2').innerText = msg;
+    console.log(elMessage);
+    elMessage.classList.remove('hidden');
+    var elBody = document.querySelector('body');
+    elBody.style.backgroundColor = 'rgba(132, 255, 138, 0.5)';
+
+    setTimeout(() => {
+        elMessage.classList.add('hidden');
+        elBody.style.backgroundColor = 'rgba(195, 218, 224, 0.306);';
+    }, 2000);
 }

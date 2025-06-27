@@ -2,6 +2,7 @@
 
 var gBooks
 var gFilterBy = ''
+var gMsg = ''
 function onInit(){
     books();
     render(gFilterBy)
@@ -19,7 +20,7 @@ function render(gFilterBy){
     const elBooks = document.querySelector('.book-list');
     const booksToFilter = filterBooks(gFilterBy);
     booksToFilter.map(book => {
-        strHTMLs += `<tr class="book">
+        strHTMLs += `<tr class="table-row">
                     <td>${book.title}</td>
                     <td>${book.price}</td>
                     <td><button class="action read" onclick="onReadBook('${book.id}')">Read</button>
@@ -33,6 +34,8 @@ function render(gFilterBy){
 function onReadBook(bookId){
     readBook(bookId);
     render(gFilterBy);
+    gMsg = 'Book details loaded successfully!';
+    showMessage(gMsg)
 
 }
 function onUpdateBook(bookId){
@@ -44,17 +47,23 @@ function onUpdateBook(bookId){
     updateBook(bookId,newPrice);   
     saveToStorage('books', gBooks);
     render(gFilterBy);
+    gMsg = 'Book updated successfully!';
+    showMessage(gMsg)
 }
 
 function onRemoveBook(bookId){
     removeBook(bookId);
     saveToStorage('books', gBooks);
     render(gFilterBy);
+    gMsg = 'Book removed successfully!';
+    showMessage(gMsg);
 }
 function onAddBook(){
     addBook();
     saveToStorage('books', gBooks);
     render(gFilterBy);
+    gMsg = 'Book added successfully!';
+    showMessage(gMsg);
 }
 
 function onSearch(input){
@@ -69,6 +78,5 @@ function filterBooks(gFilterBy){
 function onResetSearch(){
     resetSearch();
     clearTextInput();
-
 }
 
