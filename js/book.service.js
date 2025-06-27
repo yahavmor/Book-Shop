@@ -79,6 +79,6 @@ function showMessage(msg) {
 
     setTimeout(() => {
         elMessage.classList.add('hidden');
-        elBody.style.backgroundColor = 'rgba(195, 218, 224, 0.306);';
+        elBody.style.backgroundColor =  'rgb(146, 145, 145)';
     }, 2000);
 }

@@ -3,6 +3,9 @@
 var gBooks
 var gFilterBy = ''
 var gMsg = ''
+var gExpensiveBooksCount = 0;
+var gAverageBooksCount = 0; 
+var gCheapBooksCount = 0;
 function onInit(){
     books();
     render(gFilterBy)
@@ -29,6 +32,7 @@ function render(gFilterBy){
                 </tr>`;
     })    
     elBooks.innerHTML = strHTMLs
+    showStats()
 }
 
 function onReadBook(bookId){
@@ -78,5 +82,19 @@ function filterBooks(gFilterBy){
 function onResetSearch(){
     resetSearch();
     clearTextInput();
+}
+
+function showStats(){
+    const elExpensiveBooksCount = document.querySelector('.expensive-books-count ');
+    const elAverageBooksCount = document.querySelector('.average-books-count ');
+    const elCheapBooksCount = document.querySelector('.cheap-books-count ');
+
+    gExpensiveBooksCount = gBooks.filter(book => book.price > 200).length;
+    gAverageBooksCount = gBooks.filter(book => book.price >= 80 && book.price <= 200).length;
+    gCheapBooksCount = gBooks.filter(book => book.price < 80).length;
+
+    elExpensiveBooksCount.textContent = gExpensiveBooksCount;
+    elAverageBooksCount.textContent = gAverageBooksCount;
+    elCheapBooksCount.textContent = gCheapBooksCount;
 }
 
