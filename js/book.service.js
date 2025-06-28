@@ -23,10 +23,15 @@ function removeBook(bookId) {
     const bookIndex = gBooks.findIndex(book => book.id === bookId);
     gBooks.splice(bookIndex, 1);   
 }
-function updateBook(bookId,newPrice) {
+function updateBook(bookId) {
+        const newPrice = +prompt('Enter new price:');
+        if(isNaN(newPrice)||newPrice <= 0){
+        alert('Invalid price. Please enter a valid number greater than or equal to 0.');
+        return false;
+    }
     const book = gBooks.find(book => book.id === bookId);
-    book.price = newPrice; 
-    showMessage('Book updated successfully!');
+    book.price = newPrice;
+    return true;
 }
 
 function readBook(bookId) {
@@ -40,16 +45,15 @@ function addBook() {
     const title = prompt('Enter book title:');
     if (!title) {
         alert('Title cannot be empty');
-        return;
+        return false;
     }
-    const price = prompt('Enter book price:');
+    const price = +prompt('Enter book price:');
     if (isNaN(price) || price < 0) {
         alert('Invalid price. Please enter a valid number greater than or equal to 0.');
-        return;
+        return false;
     }
     createBook(title, price);
-    showMessage('Book added successfully!');
-
+    return true;
 }
 
 function makeId(){
@@ -81,4 +85,9 @@ function showMessage(msg) {
         elMessage.classList.add('hidden');
         elBody.style.backgroundColor =  'rgb(146, 145, 145)';
     }, 2000);
+}
+function getStat(){
+    gExpensiveBooksCount = gBooks.filter(book => book.price > 200).length;
+    gAverageBooksCount = gBooks.filter(book => book.price >= 80 && book.price <= 200).length;
+    gCheapBooksCount = gBooks.filter(book => book.price < 80).length;
 }

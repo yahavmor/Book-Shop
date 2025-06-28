@@ -6,11 +6,13 @@ var gMsg = ''
 var gExpensiveBooksCount = 0;
 var gAverageBooksCount = 0; 
 var gCheapBooksCount = 0;
+
+
 function onInit(){
-    books();
+    initBooks();
     render(gFilterBy)
 }
-function books(){
+function initBooks(){
     gBooks = loadFromStorage('books');
     if (!gBooks || !gBooks.length) {
         gBooks = getBooks();
@@ -22,16 +24,19 @@ function render(gFilterBy){
         var strHTMLs = '';
     const elBooks = document.querySelector('.book-list');
     const booksToFilter = filterBooks(gFilterBy);
-    booksToFilter.map(book => {
+    if(!booksToFilter.length) elBooks.innerHTML = `<tr> <td class="empty-table-message">No Matching Books Were Found....</td></tr>`; 
+        else{ booksToFilter.map(book => {
         strHTMLs += `<tr class="table-row">
-                    <td>${book.title}</td>
-                    <td>${book.price}</td>
-                    <td><button class="action read" onclick="onReadBook('${book.id}')">Read</button>
+                    <td class="table-collumn">${book.title}</td>
+                    <td class="table-collumn">${book.price}</td>
+                    <td class="table-collumn"><button class="action read" onclick="onReadBook('${book.id}')">Read</button>
                      <button class="action update" onclick="onUpdateBook('${book.id}')">update</button> 
                      <button class="action delete" onclick=" onRemoveBook('${book.id}')">delete</button></td>
                 </tr>`;
-    })    
+    })
     elBooks.innerHTML = strHTMLs
+    }    
+    
     showStats()
 }
 
@@ -43,12 +48,8 @@ function onReadBook(bookId){
 
 }
 function onUpdateBook(bookId){
-    const newPrice = +prompt('Enter new price:');
-    if(isNaN(newPrice)||newPrice <= 0){
-        alert('Invalid price. Please enter a valid number greater than or equal to 0.');
-        return
-    }
-    updateBook(bookId,newPrice);   
+    const isValid  = updateBook(bookId);
+    if (!isValid) return;
     saveToStorage('books', gBooks);
     render(gFilterBy);
     gMsg = 'Book updated successfully!';
@@ -63,7 +64,8 @@ function onRemoveBook(bookId){
     showMessage(gMsg);
 }
 function onAddBook(){
-    addBook();
+    const isValid = addBook();
+    if (!isValid) return;
     saveToStorage('books', gBooks);
     render(gFilterBy);
     gMsg = 'Book added successfully!';
@@ -88,13 +90,9 @@ function showStats(){
     const elExpensiveBooksCount = document.querySelector('.expensive-books-count ');
     const elAverageBooksCount = document.querySelector('.average-books-count ');
     const elCheapBooksCount = document.querySelector('.cheap-books-count ');
-
-    gExpensiveBooksCount = gBooks.filter(book => book.price > 200).length;
-    gAverageBooksCount = gBooks.filter(book => book.price >= 80 && book.price <= 200).length;
-    gCheapBooksCount = gBooks.filter(book => book.price < 80).length;
-
-    elExpensiveBooksCount.textContent = gExpensiveBooksCount;
-    elAverageBooksCount.textContent = gAverageBooksCount;
-    elCheapBooksCount.textContent = gCheapBooksCount;
+    getStat();
+    elExpensiveBooksCount.innerHTML = gExpensiveBooksCount;
+    elAverageBooksCount.innerHTML = gAverageBooksCount;
+    elCheapBooksCount.innerHTML = gCheapBooksCount;
 }
 

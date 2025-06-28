@@ -34,11 +34,13 @@ body {
 .book-table {
     grid-area: table;
     border-collapse: collapse;
-    border: 1px solid black;
+    table-layout: fixed;
     text-align: center;
     height: 100%;
     width:100%;
 }
+
+
 .book-list tr:nth-child(even) {
     background-color: rgb(212, 211, 205)
 }
@@ -51,12 +53,20 @@ body {
     background-color: #c3dae0e7;
 }
 .table-row {
+    border: 1px solid rgb(202, 198, 198);
+}
+.table-collumn {
     border: 1px solid black;
 }
 .table-row td {
     padding: 0.5em;
     font-size: 1em;
     height: 0.5em;
+}
+.empty-table-message{
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: rgb(146, 145, 145);
 }
 .main-header{
     text-align: center;
@@ -69,21 +79,20 @@ body {
     padding: .4em;
     cursor: pointer;
 }
-
-.read{
+.read,.update,.delete{
     border-radius: 8px;
-    background-color: rgb(37, 162, 201);
     border: none;
+    font-size: .6em;
+ 
+}
+.read{
+    background-color: rgb(37, 162, 201);
 }
 .update{
-    border-radius: 8px;
     background-color: rgb(219, 206, 21);
-    border: none;
 }
 .delete{
-    border-radius: 8px;
     background-color: rgb(233, 123, 34);
-    border: none;
 }
 .add-book{
     place-self:  end center;
