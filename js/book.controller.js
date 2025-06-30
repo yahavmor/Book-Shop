@@ -22,22 +22,28 @@ function initBooks(){
 
 function render(gFilterBy){
         var strHTMLs = '';
-    const elBooks = document.querySelector('.book-list');
+    const elBooks = document.querySelector('.book-cards');
     const booksToFilter = filterBooks(gFilterBy);
-    if(!booksToFilter.length) elBooks.innerHTML = `<tr> <td class="empty-table-message">No Matching Books Were Found....</td></tr>`; 
-        else{ booksToFilter.map(book => {
-        strHTMLs += `<tr class="table-row">
-                    <td class="table-collumn">${book.title}</td>
-                    <td class="table-collumn">${book.price}</td>
-                    <td class="table-collumn">${book.rating}</td>
+    if (!booksToFilter.length) {
+    elBooks.innerHTML = `<p class="empty-table-message">No Matching Books Were Found....</p>`;
+    } else {
+        booksToFilter.map(book => {
+            strHTMLs += `
+            <div class="book-card">
+                <div class="book-card-title">${book.title}</div>
+                <img src="${book.imgUrl}"  class="book-card-img" />
+                <div class="book-card-price">Price:${book.price} $</div>
+                <div class="book-card-rating">Rating:${book.rating} ⭐</div>
+                <div class="book-card-actions">
+                    <button class="action read" onclick="onReadBook('${book.id}')">Read</button>
+                    <button class="action update" onclick="onUpdateBook('${book.id}')">Update</button>
+                    <button class="action delete" onclick="onRemoveBook('${book.id}')">Delete</button>
+                </div>
+            </div>`;
+        });
+    elBooks.innerHTML = strHTMLs;
+}
 
-                    <td class="table-collumn"><button class="action read" onclick="onReadBook('${book.id}')">Read</button>
-                     <button class="action update" onclick="onUpdateBook('${book.id}')">update</button> 
-                     <button class="action delete" onclick=" onRemoveBook('${book.id}')">delete</button></td>
-                </tr>`;
-    })
-    elBooks.innerHTML = strHTMLs
-    }    
     
     showStats()
 }

@@ -17,7 +17,7 @@ function createBook(title, price ,rating) {
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         rating
     };      
-    gBooks.push(book);
+    gBooks.unshift(book);
     showMessage('Book added successfully!');
 }
 
@@ -42,11 +42,11 @@ function readBook(bookId) {
     const elContent = elModal.querySelector('.dialog-content');
 
     elContent.innerHTML = `
-        <h2 class="book-title">${book.title}</h2>
-        <img class="book-image" src="${book.imgUrl}" />
-        <p class="book-price">Price: $${book.price}</p>
+        <h2 class="book-card-title">${book.title}</h2>
+        <img class="book-card-img" src="${book.imgUrl}" />
+        <p class="book-card-price">Price: ${book.price}$</p>
         <p class="book-txt">${book.content}</p>
-        <p class="book-rating">Rating: ${book.rating} stars</p>`;
+        <p class="book-card-rating">Rating: ${book.rating} stars</p>`;
         
 
     elModal.showModal();

@@ -7,62 +7,76 @@
 
 body {
     position: relative;
-    height: 70vh;
-    width: 80vw;
+    height: 80vh;
+    width: 90vw;
     font-size: 1.5em;
     margin: 5vw;
     font-family: Arial, sans-serif;
     background-color: rgb(146, 145, 145);
 
 }
+.features{
+    display: flex;
+    gap: 1em;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 1em;
+}
 .container{
     margin: auto;
-    width: 70%;
-    height: 80%;
-    display: grid;
-    grid-template-columns:repeat(2, 1fr);
-    grid-template-rows:  1fr 5fr 5fr ;
-    grid-template-areas: 
-        "filter add "
-        "table table "
-        "table table ";
-    place-items: center;
-    
-
 }
 
-.book-table {
-    grid-area: table;
-    border-collapse: collapse;
-    table-layout: fixed;
-    text-align: center;
-    height: 100%;
-    width:100%;
+.book-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5em;
+    align-items: flex-start;
+    border : 1px solid #ccc;
+    width: 70%;   
+    margin: auto;
+}
+.book-card {
+    background-color: rgb(50, 202, 207);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    min-height: 150px;
+    max-height: 250px;
+    justify-content: space-evenly;
+    padding: .5em;
+    gap: .5em;
 }
 
 
-.book-list tr:nth-child(even) {
-    background-color: rgb(212, 211, 205)
+.book-card-img {
+    width: 30%;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
-.book-list tr:nth-child(odd) {
-    background-color: white
+
+.book-card-title {
+    font-size: .7em;
+    font-weight: bold;
 }
-.table-header th {
-    padding: 0.2em 0.5em;
-    font-size: 1em;
-    background-color: #c3dae0e7;
+
+.book-card-price {
+    font-size: .5em;
+    color: white;
 }
-.table-row {
-    border: 1px solid rgb(202, 198, 198);
+
+.book-card-rating {
+    font-size: 0.7em;
+    color: white;
 }
-.table-collumn {
-    border: 1px solid black;
+
+.book-card-actions {
+    display: flex;
+    gap: 0.3em;
 }
-.table-row td {
-    padding: 0.5em;
-    font-size: 1em;
-    height: 0.5em;
-}
+
 .empty-table-message{
     font-size: 1.2em;
     font-weight: bold;
@@ -107,6 +121,9 @@ body {
 }
 .footer{
     display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    border-radius: 8px;
     margin-top: 20px;
     justify-content: space-between;
     background-color: #c3dae0e7;
@@ -156,15 +173,11 @@ body {
     cursor: pointer;
 }
 .filter{
-    place-self: end center;
-    grid-area: filter;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: .5em;
-    width: 80%;
-    margin-bottom: 10px;
 }
 .header{
     grid-area: header;

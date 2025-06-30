@@ -10,43 +10,28 @@
         
             <h1 class="main-header">Book Shop</h1>
 
+            <div class="features">
+                    <div class="filter">
+                    <button onclick="onResetSearch()">Reset Search</button>
+                    <input class="input" placeholder="Search for a book..." oninput="onSearch(this)"></div>
+                    <button class="add-book" onclick="onAddBook()">Add Book</button>
+            </div>
+
 
 
             <div class="container">
+                <div class="book-cards"></div> 
+            </div>
+             
 
-
-                    <div class="filter">
-                    <button onclick="onResetSearch()">Reset Search</button>
-                    <input class="input" placeholder="Search for a book..." oninput="onSearch(this)">
-                    </div>
-
-
-                    <button class="add-book" onclick="onAddBook()">Add Book</button>
-
-
-
-            <table class="book-table">
-                <thead>
-                    <tr class="table-header">
-                    <th>Title</th>
-                    <th>Price ($)</th>
-                    <th>Rating (1-5)</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-        
-                <tbody class="book-list"></tbody>
-            </table>        
-            </div> 
-
-            <footer class="footer">
+            <div class="footer">
                 <p class="footer-text">Book Shop - All rights reserved &copy; 2025</p>
                 <div class="footer-stats">
                     <p class="expensive-books">Expensive Books: <span class="expensive-books-count"></span></p>
                     <p class="average-books">Average Books: <span class="average-books-count"></span></p>
                     <p class="cheap-books">Cheap Books: <span class="cheap-books-count"></span></p>
                 </div>
-            </footer>
+            </div>
 
         <dialog class="book-details-modal">
             <form method="dialog">
