@@ -6,6 +6,8 @@ var gMsg = ''
 var gExpensiveBooksCount = 0;
 var gAverageBooksCount = 0; 
 var gCheapBooksCount = 0;
+var STORAGE_KEY = 'books';
+var gBookToEditId = null
 
 
 function onInit(){
@@ -16,7 +18,7 @@ function initBooks(){
     gBooks = loadFromStorage('books');
     if (!gBooks || !gBooks.length) {
         gBooks = getBooks();
-        saveToStorage('books', gBooks);
+        saveToStorage(STORAGE_KEY, gBooks);
     }
 }
 
@@ -31,7 +33,7 @@ function render(gFilterBy){
             strHTMLs += `
             <div class="book-card">
                 <div class="book-card-title">${book.title}</div>
-                <img src="${book.imgUrl}"  class="book-card-img" />
+                <img src="${book.imgUrl}" alt="photo of ${book.title}"  class="book-card-img" />
                 <div class="book-card-price">Price:${book.price} $</div>
                 <div class="book-card-rating">Rating:${book.rating} ⭐</div>
                 <div class="book-card-actions">
@@ -56,28 +58,27 @@ function onReadBook(bookId){
 
 }
 function onUpdateBook(bookId){
-    const isValid  = updateBook(bookId);
-    if (!isValid) return;
-    saveToStorage('books', gBooks);
-    render(gFilterBy);
-    gMsg = 'Book updated successfully!';
-    showMessage(gMsg)
+    gBookToEditId = bookId
+    const elBookModal = document.querySelector('.book-edit-modal');
+    const book = gBooks.find(book => book.id === bookId);
+    const title = elBookModal.querySelector('.book-name-input').value=`${book.title}`;
+    const price = elBookModal.querySelector('.book-price-input').value=`${book.price}`;
+    const rating = elBookModal.querySelector('.book-rating-input').value=`${book.rating}`; 
+    elBookModal.showModal();
 }
 
 function onRemoveBook(bookId){
     removeBook(bookId);
-    saveToStorage('books', gBooks);
+    saveToStorage(STORAGE_KEY, gBooks);
     render(gFilterBy);
     gMsg = 'Book removed successfully!';
     showMessage(gMsg);
 }
 function onAddBook(){
-    const isValid = addBook();
-    if (!isValid) return;
-    saveToStorage('books', gBooks);
-    render(gFilterBy);
-    gMsg = 'Book added successfully!';
-    showMessage(gMsg);
+    gBookToEditId = null
+    clearTextInput()
+    const elBookModal = document.querySelector('.book-edit-modal');
+    elBookModal.showModal();
 }
 
 function onSearch(input){
@@ -102,5 +103,46 @@ function showStats(){
     elExpensiveBooksCount.innerHTML = gExpensiveBooksCount;
     elAverageBooksCount.innerHTML = gAverageBooksCount;
     elCheapBooksCount.innerHTML = gCheapBooksCount;
+}
+
+function onSaveBook(){
+    const elBookModal = document.querySelector('.book-edit-modal');
+    const title = elBookModal.querySelector('.book-name-input').value;
+    const price = +elBookModal.querySelector('.book-price-input').value;
+    const rating = +elBookModal.querySelector('.book-rating-input').value;
+    const imgUrl = 'img/default book cover.jpg'
+    
+
+    if (!title || isNaN(price) || price < 0 || isNaN(rating) || rating < 1 || rating > 5 ) {
+        alert('Please fill all fields correctly.');
+        return;
+    }
+    if(gBookToEditId){
+        const book = findBookById(gBookToEditId)
+        book.title = title
+        book.price = price
+        book.rating = rating
+        book.imgUrl= imgUrl
+        saveToStorage(STORAGE_KEY, gBooks);
+        gMsg = 'Book updated successfully!';
+
+
+    }else{
+        clearTextInput()
+        createBook(title, price, rating, imgUrl);
+        saveToStorage(STORAGE_KEY, gBooks);
+        gMsg = 'Book added successfully!';
+
+    }
+    render(gFilterBy);
+    elBookModal.close();
+    showMessage(gMsg);
+}
+
+function onCloseBookEditModal(){
+    
+    const elModal = document.querySelector('.book-edit-modal')
+    isAddMode ? clearTextInput() : null
+    elModal.close()
 }
 

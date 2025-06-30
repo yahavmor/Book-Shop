@@ -8,33 +8,23 @@ function getBooks(){
     ]
 }
 
-function createBook(title, price ,rating) {
+function createBook(title, price, rating, imgUrl) {
     const book = {
         id: makeId(),
         title,
         price: +price,
-        imgUrl: 'img/default book cover.jpg',
+        imgUrl,
         content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         rating
     };      
     gBooks.unshift(book);
-    showMessage('Book added successfully!');
 }
 
 function removeBook(bookId) {
     const bookIndex = gBooks.findIndex(book => book.id === bookId);
     gBooks.splice(bookIndex, 1);   
 }
-function updateBook(bookId) {
-        const newPrice = +prompt('Enter new price:');
-        if(isNaN(newPrice)||newPrice <= 0){
-        alert('Invalid price. Please enter a valid number greater than or equal to 0.');
-        return false;
-    }
-    const book = gBooks.find(book => book.id === bookId);
-    book.price = newPrice;
-    return true;
-}
+
 
 function readBook(bookId) {
     const book = gBooks.find(book => book.id === bookId);
@@ -42,50 +32,29 @@ function readBook(bookId) {
     const elContent = elModal.querySelector('.dialog-content');
 
     elContent.innerHTML = `
-        <h2 class="book-card-title">${book.title}</h2>
-        <img class="book-card-img" src="${book.imgUrl}" />
-        <p class="book-card-price">Price: ${book.price}$</p>
-        <p class="book-txt">${book.content}</p>
-        <p class="book-card-rating">Rating: ${book.rating} stars</p>`;
+        <h2 class="book-dialog-title">${book.title}</h2>
+        <img class="book-dialog-img" src="${book.imgUrl}" />
+        <p class="book-dialog-price">Price: ${book.price}$</p>
+        <p class="book-dialog-txt">${book.content}</p>
+        <p class="book-dialog-rating">Rating: ${book.rating} stars</p>`;
         
 
     elModal.showModal();
 }
-
-function addBook() {
-    const title = prompt('Enter book title:');
-    if (!title) {
-        alert('Title cannot be empty');
-        return false;
-    }
-    const price = +prompt('Enter book price:');
-    if (isNaN(price) || price < 0) {
-        alert('Invalid price. Please enter a valid number greater than or equal to 0.');
-        return false;
-    }
-    const rating = +prompt('Enter book rating:(1 is the lowest, 5 is the highest)');
-    if (isNaN(rating) || rating>5||rating<1) {
-        alert('Invalid rating. Please enter a valid number between 1 to 5.');
-        return false;
-    }
-    createBook(title, price, rating);
-    return true;
-}
-
 
 function resetSearch(){
     gFilterBy = ''
     render(gFilterBy);
 }
 function clearTextInput(){
-    const elInput = document.querySelector('.input');
-    elInput.value = '';
-    elInput.focus();
+    const elBookModal = document.querySelector('.book-edit-modal');
+    const title = elBookModal.querySelector('.book-name-input').value='';
+    const price = elBookModal.querySelector('.book-price-input').value='';
+    const rating = elBookModal.querySelector('.book-rating-input').value=''; 
 }
 function showMessage(msg) {
     const elMessage = document.querySelector('.message-modal'); 
     elMessage.querySelector('.message-text span2').innerText = msg;
-    console.log(elMessage);
     elMessage.classList.remove('hidden');
     var elBody = document.querySelector('body');
 
@@ -98,3 +67,4 @@ function getStat(){
     gAverageBooksCount = gBooks.filter(book => book.price >= 80 && book.price <= 200).length;
     gCheapBooksCount = gBooks.filter(book => book.price < 80).length;
 }
+

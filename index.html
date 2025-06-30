@@ -35,10 +35,24 @@
 
         <dialog class="book-details-modal">
             <form method="dialog">
-                <h2 class="dialog-title">More Details About The Book</h2>
+                <h2 class="dialog-header">More Details About The Book</h2>
                 <div class="dialog-content"></div>    
                 
                 <button class="close-modal">X</button>
+            </form>
+        </dialog>
+
+        <dialog class="book-edit-modal">
+            <form onsubmit="onSaveBook()" method="dialog">
+                <h2>Add Book</h2>
+                <img src="" alt="">
+                <input type="text" placeholder="Book Name" class="book-name-input">
+                <input type="text" placeholder="Book Price" class="book-price-input">
+                <input type="text" placeholder="Book Rating" class="book-rating-input">
+                <div class="actions">
+                    <button type="button" onclick="onCloseBookEditModal()">Cancel</button>
+                    <button>Save</button>
+                </div>
             </form>
         </dialog>
 

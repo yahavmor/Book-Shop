@@ -161,9 +161,17 @@ body {
 }
 .book-details-modal{ 
     position: relative;
-    width: 70%;
-    height: 50%;
+    width: 90%;
+    height: 70%;
     background-color: rgba(195, 218, 224, 0.905);
+}
+.dialog-header{
+    text-align: center;
+    font-size: 1.5em;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 1em;
+
 }
 .close-modal{
     position: absolute;
@@ -179,39 +187,40 @@ body {
     align-items: center;
     gap: .5em;
 }
-.header{
-    grid-area: header;
-}
-.dialog-title{
+.book-dialog-title{
     text-align: center;
-    font-size: 1.5em;
+    font-weight: bold;
+    color: rgb(56, 114, 101); 
+    font-size: 2em;
     margin-bottom: 1em;
 }
-.book-image{
+.book-dialog-img{
     width: 70%;
     height: 300px;
     border-radius: 8px;
+    margin: auto;
 
 }
-.book-title{
-    font-size: 1.5em;
-    font-weight: bold;
-    text-align: center;
-}
-.book-price{
+.book-dialog-price{
     font-size: 1.2em;
     text-align: center;
     font-weight: bold;
     color: #333;
 }
-.book-txt{
+.book-dialog-txt{
     font-size: 1em;
     text-align: center;
     padding: 0.5em;
     overflow-y: auto;
     max-height: 200px;
-    background-color: #f9f9f9;
+    color: #333;
     border-radius: 8px;
+}
+.book-dialog-rating{
+    font-size: 1em;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
 }
 
 .message-modal{

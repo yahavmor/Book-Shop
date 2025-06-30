@@ -12,3 +12,7 @@ function makeId(){
     }
     return text;
 }
+
+function findBookById(bookId){
+    return gBooks.find(book => book.id === bookId);
+}
