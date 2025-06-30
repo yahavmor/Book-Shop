@@ -29,6 +29,8 @@ function render(gFilterBy){
         strHTMLs += `<tr class="table-row">
                     <td class="table-collumn">${book.title}</td>
                     <td class="table-collumn">${book.price}</td>
+                    <td class="table-collumn">${book.rating}</td>
+
                     <td class="table-collumn"><button class="action read" onclick="onReadBook('${book.id}')">Read</button>
                      <button class="action update" onclick="onUpdateBook('${book.id}')">update</button> 
                      <button class="action delete" onclick=" onRemoveBook('${book.id}')">delete</button></td>

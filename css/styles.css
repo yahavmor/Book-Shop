@@ -82,7 +82,7 @@ body {
 .read,.update,.delete{
     border-radius: 8px;
     border: none;
-    font-size: .6em;
+    font-size: .45em;
  
 }
 .read{
@@ -175,9 +175,10 @@ body {
     margin-bottom: 1em;
 }
 .book-image{
-    width: 100%;
-    height: auto;
+    width: 70%;
+    height: 300px;
     border-radius: 8px;
+
 }
 .book-title{
     font-size: 1.5em;
