@@ -95,16 +95,17 @@ function getStat(){
     gCheapBooksCount = gBooks.filter(book => book.price < 80).length;
 }
 function sortBooks(books){
+    const dir = gQueryOptions.gSortBy.dir? -1 : 1
 
-    switch (gQueryOptions.gSortBy){
+    switch (gQueryOptions.gSortBy.option){
 
         case 'all': return books
 
-        case 'title':return books.sort((a, b) => a.title.localeCompare(b.title));
+        case 'title':return books.sort((a, b) => (a.title.localeCompare(b.title))*dir);
 
-        case 'rating': return books.sort((a,b)=>a.rating-b.rating)
+        case 'rating': return books.sort((a,b)=>(a.rating-b.rating)*dir)
 
-        case 'price': return books.sort((a,b)=>a.price-b.price)
+        case 'price': return books.sort((a,b)=>(a.price-b.price)*dir)
 
     }
 

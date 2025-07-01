@@ -185,6 +185,11 @@ body {
     align-items: center;
     gap: .5em;
 }
+
+.sort-dir{
+    width: 30px;
+    height: 30px;
+}
 .book-dialog-title{
     text-align: center;
     font-weight: bold;

@@ -10,13 +10,9 @@ var gBookToEditId = null
 const STORAGE_KEY = 'booksDb'
 
 var gQueryOptions ={
-
     gFilterBy:{filterTitle:null,filterRating:null},
-
-    gSortBy:'all',
-
+    gSortBy:{option:'all',dir:true},
     gPage:{idx:0,size:4}
-
 }
 
 
@@ -33,49 +29,27 @@ function initBooks(){
 }
 
 function render(){
-
     var strHTMLs = '';
-
     const elBooks = document.querySelector('.book-cards');
-
     var books = gBooks.slice()
-
     gFilteredBooks = filterBooks(books);
-
     if (!gFilteredBooks.length) {
-
-    elBooks.innerHTML = `<p class="empty-table-message">No Matching Books Were Found....</p>`;
-
+        elBooks.innerHTML = `<p class="empty-table-message">No Matching Books Were Found....</p>`;
     } else {
-
         const filterAndSortedBooks = sortBooks(gFilteredBooks)
-
         filterAndSortedBooks.map(book => {
-
-            strHTMLs += `
-
-            <div class="book-card">
-
+        strHTMLs += `
+                <div class="book-card">
                 <div class="book-card-title">${book.title}</div>
-
                 <img src="${book.imgUrl}"  class="book-card-img" />
-
                 <div class="book-card-price">Price:${book.price} $</div>
-
                 <div class="book-card-rating">Rating: ${'⭐'.repeat(book.rating)}</div>
-
                 <div class="book-card-actions">
-
                 <button class="action read" onclick="onReadBook('${book.id}')">Read</button>
-
                 <button class="action update" onclick="onUpdateBook('${book.id}')">Update</button>
-
                 <button class="action delete" onclick="onRemoveBook('${book.id}')">Delete</button>
-
                 </div>
-
             </div>`;
-
         });
 
     elBooks.innerHTML = strHTMLs;
@@ -199,9 +173,13 @@ function onSaveBook(){
     elBookModal.close();
     showMessage(gMsg);
 }
-function onSortBy(sort){
+function onSortBy(){
+    const elCheckBox = document.querySelector('.sort-dir')
+    const elSortOptions = document.querySelector('.sort')
 
-    gQueryOptions.gSortBy = sort.value
+    gQueryOptions.gSortBy.option = elSortOptions.value
+    gQueryOptions.gSortBy.dir = elCheckBox.checked
+
 
     render()
 
