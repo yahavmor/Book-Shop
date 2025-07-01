@@ -11,18 +11,28 @@
             <h1 class="main-header">Book Shop</h1>
 
             <div class="features">
-                    <div class="filter">
+                <div class="filter">
                     <button onclick="onResetSearch()">Reset Search</button>
-                    <input class="input" placeholder="Search for a book..." oninput="onSearch(this)"></div>
-                    <button class="add-book" onclick="onAddBook()">Add Book</button>
+                    <input class="input-title" placeholder="Search for a book..." oninput="onSearch(this)">
+                </div>
+                <label for="input">Select Rating:
+                    <input class="input-rating" type="range" min=0 max=5 value=0 oninput="onSearch(this)"></input>
+                </label>
+                <label for="select">Sort by:
+                    <select class="sort" onchange="onSortBy(this)">
+                        <option value="all">All</option>
+                        <option value="title">Title</option>
+                        <option value="rating">Rating</option>
+                        <option value="price">Price</option>
+                    </select>
+
+                </label>
+                <button class="add-book" onclick="onAddBook()">Add Book</button>
             </div>
-
-
 
             <div class="container">
                 <div class="book-cards"></div> 
             </div>
-             
 
             <div class="footer">
                 <p class="footer-text">Book Shop - All rights reserved &copy; 2025</p>
@@ -44,7 +54,7 @@
 
         <dialog class="book-edit-modal">
             <form onsubmit="onSaveBook()" method="dialog">
-                <h2>Add Book</h2>
+                <h2><span></span> Book</h2>
                 <img src="" alt="">
                 <input type="text" placeholder="Book Name" class="book-name-input">
                 <input type="text" placeholder="Book Price" class="book-price-input">

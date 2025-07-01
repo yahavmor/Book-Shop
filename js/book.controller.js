@@ -1,18 +1,28 @@
 'use strict';
 
 var gBooks
-var gFilterBy = ''
 var gMsg = ''
 var gExpensiveBooksCount = 0;
-var gAverageBooksCount = 0; 
+var gAverageBooksCount = 0;
 var gCheapBooksCount = 0;
-var STORAGE_KEY = 'books';
+var gFilteredBooks  = null
 var gBookToEditId = null
+const STORAGE_KEY = 'booksDb'
+
+var gQueryOptions ={
+
+    gFilterBy:{filterTitle:null,filterRating:null},
+
+    gSortBy:'all',
+
+    gPage:{idx:0,size:4}
+
+}
 
 
 function onInit(){
     initBooks();
-    render(gFilterBy)
+    render()
 }
 function initBooks(){
     gBooks = loadFromStorage('books');
@@ -22,44 +32,68 @@ function initBooks(){
     }
 }
 
-function render(gFilterBy){
-        var strHTMLs = '';
+function render(){
+
+    var strHTMLs = '';
+
     const elBooks = document.querySelector('.book-cards');
-    const booksToFilter = filterBooks(gFilterBy);
-    if (!booksToFilter.length) {
+
+    var books = gBooks.slice()
+
+    gFilteredBooks = filterBooks(books);
+
+    if (!gFilteredBooks.length) {
+
     elBooks.innerHTML = `<p class="empty-table-message">No Matching Books Were Found....</p>`;
+
     } else {
-        booksToFilter.map(book => {
+
+        const filterAndSortedBooks = sortBooks(gFilteredBooks)
+
+        filterAndSortedBooks.map(book => {
+
             strHTMLs += `
+
             <div class="book-card">
+
                 <div class="book-card-title">${book.title}</div>
-                <img src="${book.imgUrl}" alt="photo of ${book.title}"  class="book-card-img" />
+
+                <img src="${book.imgUrl}"  class="book-card-img" />
+
                 <div class="book-card-price">Price:${book.price} $</div>
-                <div class="book-card-rating">Rating:${book.rating} ⭐</div>
+
+                <div class="book-card-rating">Rating: ${'⭐'.repeat(book.rating)}</div>
+
                 <div class="book-card-actions">
-                    <button class="action read" onclick="onReadBook('${book.id}')">Read</button>
-                    <button class="action update" onclick="onUpdateBook('${book.id}')">Update</button>
-                    <button class="action delete" onclick="onRemoveBook('${book.id}')">Delete</button>
+
+                <button class="action read" onclick="onReadBook('${book.id}')">Read</button>
+
+                <button class="action update" onclick="onUpdateBook('${book.id}')">Update</button>
+
+                <button class="action delete" onclick="onRemoveBook('${book.id}')">Delete</button>
+
                 </div>
+
             </div>`;
+
         });
+
     elBooks.innerHTML = strHTMLs;
 }
-
-    
     showStats()
+
 }
 
 function onReadBook(bookId){
     readBook(bookId);
-    render(gFilterBy);
     gMsg = 'Book details loaded successfully!';
     showMessage(gMsg)
-
 }
+
 function onUpdateBook(bookId){
     gBookToEditId = bookId
     const elBookModal = document.querySelector('.book-edit-modal');
+    elBookModal.querySelector('span').innerHTML = 'Update'
     const book = gBooks.find(book => book.id === bookId);
     const title = elBookModal.querySelector('.book-name-input').value=`${book.title}`;
     const price = elBookModal.querySelector('.book-price-input').value=`${book.price}`;
@@ -75,20 +109,49 @@ function onRemoveBook(bookId){
     showMessage(gMsg);
 }
 function onAddBook(){
+    const elBookModal = document.querySelector('.book-edit-modal');
+    elBookModal.querySelector('span').innerHTML = 'Add'
     gBookToEditId = null
     clearTextInput()
-    const elBookModal = document.querySelector('.book-edit-modal');
     elBookModal.showModal();
 }
 
 function onSearch(input){
-    gFilterBy = input.value.toLowerCase();
-    render(gFilterBy);
+
+    gQueryOptions.gFilterBy.filterTitle = input.value.toLowerCase();
+
+    gQueryOptions.gFilterBy.filterRating = +input.value
+
+    render()
+
 }
 
-function filterBooks(gFilterBy){
-    if (!gFilterBy) return gBooks;
-    return gBooks.filter(book => book.title.toLowerCase().includes(gFilterBy));  
+function filterBooks(books) {
+
+    const elInputTitle = document.querySelector('.input-title');
+
+    const elInputRating = document.querySelector('.input-rating');
+
+ 
+
+    const titleFilter = elInputTitle.value.toLowerCase();
+
+    const ratingFilter = +elInputRating.value;
+
+   
+
+ 
+
+    return books.filter(book => {
+
+        const matchTitle = !titleFilter||book.title.toLowerCase().includes(titleFilter);
+
+        const matchRating = !ratingFilter||book.rating === ratingFilter;
+
+        return matchTitle && matchRating;
+
+    });
+
 }
 function onResetSearch(){
     resetSearch();
@@ -111,7 +174,6 @@ function onSaveBook(){
     const price = +elBookModal.querySelector('.book-price-input').value;
     const rating = +elBookModal.querySelector('.book-rating-input').value;
     const imgUrl = 'img/default book cover.jpg'
-    
 
     if (!title || isNaN(price) || price < 0 || isNaN(rating) || rating < 1 || rating > 5 ) {
         alert('Please fill all fields correctly.');
@@ -123,20 +185,26 @@ function onSaveBook(){
         book.price = price
         book.rating = rating
         book.imgUrl= imgUrl
-        saveToStorage(STORAGE_KEY, gBooks);
         gMsg = 'Book updated successfully!';
 
 
     }else{
         clearTextInput()
         createBook(title, price, rating, imgUrl);
-        saveToStorage(STORAGE_KEY, gBooks);
         gMsg = 'Book added successfully!';
 
     }
-    render(gFilterBy);
+    saveToStorage(STORAGE_KEY, gBooks);
+    render();
     elBookModal.close();
     showMessage(gMsg);
+}
+function onSortBy(sort){
+
+    gQueryOptions.gSortBy = sort.value
+
+    render()
+
 }
 
 function onCloseBookEditModal(){
