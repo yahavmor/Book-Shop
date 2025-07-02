@@ -5,57 +5,42 @@ var gMsg = ''
 var gExpensiveBooksCount = 0;
 var gAverageBooksCount = 0;
 var gCheapBooksCount = 0;
-var gFilteredBooks  = null
 var gBookToEditId = null
 const STORAGE_KEY = 'booksDb'
 
 var gQueryOptions ={
     gFilterBy:{filterTitle:null,filterRating:null},
     gSortBy:{option:'all',dir:true},
-    gPage:{idx:0,size:4}
+    gPage:{idx:0,limit:3,totalPages:null}
 }
+
+ 
 
 
 function onInit(){
     initBooks();
-    render()
+    renderBooks()
 }
 function initBooks(){
-    gBooks = loadFromStorage('books');
+    gBooks = loadFromStorage(STORAGE_KEY);
     if (!gBooks || !gBooks.length) {
-        gBooks = getBooks();
+        gBooks = getBooksDB();
         saveToStorage(STORAGE_KEY, gBooks);
     }
 }
 
-function render(){
+function renderBooks(){
     var strHTMLs = '';
     const elBooks = document.querySelector('.book-cards');
-    var books = gBooks.slice()
-    gFilteredBooks = filterBooks(books);
-    if (!gFilteredBooks.length) {
-        elBooks.innerHTML = `<p class="empty-table-message">No Matching Books Were Found....</p>`;
-    } else {
-        const filterAndSortedBooks = sortBooks(gFilteredBooks)
-        filterAndSortedBooks.map(book => {
-        strHTMLs += `
-                <div class="book-card">
-                <div class="book-card-title">${book.title}</div>
-                <img src="${book.imgUrl}"  class="book-card-img" />
-                <div class="book-card-price">Price:${book.price} $</div>
-                <div class="book-card-rating">Rating: ${'⭐'.repeat(book.rating)}</div>
-                <div class="book-card-actions">
-                <button class="action read" onclick="onReadBook('${book.id}')">Read</button>
-                <button class="action update" onclick="onUpdateBook('${book.id}')">Update</button>
-                <button class="action delete" onclick="onRemoveBook('${book.id}')">Delete</button>
-                </div>
-            </div>`;
-        });
-
-    elBooks.innerHTML = strHTMLs;
-}
+    showPageNumber()
+    var books = getBooks()
+    if(!books.length) elBooks.innerHTML = noMatch() 
+    else {
+        books = sortBy(books)
+        strHTMLs = books.map(book =>printBook(book));
+        elBooks.innerHTML = strHTMLs.join('');
+    }
     showStats()
-
 }
 
 function onReadBook(bookId){
@@ -78,7 +63,7 @@ function onUpdateBook(bookId){
 function onRemoveBook(bookId){
     removeBook(bookId);
     saveToStorage(STORAGE_KEY, gBooks);
-    render(gFilterBy);
+    renderBooks();
     gMsg = 'Book removed successfully!';
     showMessage(gMsg);
 }
@@ -90,43 +75,23 @@ function onAddBook(){
     elBookModal.showModal();
 }
 
-function onSearch(input){
-
-    gQueryOptions.gFilterBy.filterTitle = input.value.toLowerCase();
-
-    gQueryOptions.gFilterBy.filterRating = +input.value
-
-    render()
-
+function onSearch(){  
+    gQueryOptions.gFilterBy.filterTitle = getInputValueTitle()
+    gQueryOptions.gFilterBy.filterRating = getInputValueRating()
+    renderBooks()
 }
 
-function filterBooks(books) {
+function filterBooks() {
+    const filterTitle = gQueryOptions.gFilterBy.filterTitle
+    const filterRating = gQueryOptions.gFilterBy.filterRating
 
-    const elInputTitle = document.querySelector('.input-title');
-
-    const elInputRating = document.querySelector('.input-rating');
-
- 
-
-    const titleFilter = elInputTitle.value.toLowerCase();
-
-    const ratingFilter = +elInputRating.value;
-
-   
-
- 
-
-    return books.filter(book => {
-
-        const matchTitle = !titleFilter||book.title.toLowerCase().includes(titleFilter);
-
-        const matchRating = !ratingFilter||book.rating === ratingFilter;
-
+    return gBooks.filter(book => {
+        const matchTitle = !filterTitle || book.title.toLowerCase().includes(filterTitle);
+        const matchRating = !filterRating || book.rating === +filterRating;
         return matchTitle && matchRating;
-
     });
-
 }
+
 function onResetSearch(){
     resetSearch();
     clearTextInput();
@@ -169,20 +134,19 @@ function onSaveBook(){
 
     }
     saveToStorage(STORAGE_KEY, gBooks);
-    render();
+    renderBooks();
     elBookModal.close();
     showMessage(gMsg);
 }
 function onSortBy(){
-    const elCheckBox = document.querySelector('.sort-dir')
     const elSortOptions = document.querySelector('.sort')
+    const elAccending = document.querySelector('.sort-dir-acc')
+    const elDeccending = document.querySelector('.sort-dir-decc')
+    gQueryOptions.gSortBy.dir = elDeccending.checked ? false : true
 
     gQueryOptions.gSortBy.option = elSortOptions.value
-    gQueryOptions.gSortBy.dir = elCheckBox.checked
-
-
-    render()
-
+    gQueryOptions.gPage.idx = 0
+    renderBooks()
 }
 
 function onCloseBookEditModal(){
@@ -192,3 +156,48 @@ function onCloseBookEditModal(){
     elModal.close()
 }
 
+function getBooks(){
+    if(gQueryOptions.gFilterBy.filterRating||gQueryOptions.gFilterBy.filterTitle) return filterBooks() 
+    else return sliceBooks()
+}
+
+function onNextPage(){
+
+    if(gQueryOptions.gPage.totalPages-1===gQueryOptions.gPage.idx){
+
+        gQueryOptions.gPage.idx=0
+
+    }else gQueryOptions.gPage.idx++
+
+ 
+
+    renderBooks()
+
+ 
+
+}
+
+function onPrevPage(){  
+
+    if(!gQueryOptions.gPage.idx){
+
+        gQueryOptions.gPage.idx= gQueryOptions.gPage.totalPages-1
+
+    }else gQueryOptions.gPage.idx--
+
+    renderBooks()
+
+}
+
+
+function getInputValueTitle(){
+    const inputValue = document.querySelector('.input-title').value.toLowerCase()
+    return inputValue
+}
+function getInputValueRating(){
+    const inputValue = document.querySelector('.input-rating').value
+    return +inputValue  
+}
+function noMatch(){
+    return `<p class="empty-table-message">No Matching Books Were Found....</p>`;
+}

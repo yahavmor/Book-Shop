@@ -10,15 +10,40 @@ body {
     font-size: 1.5em;
     margin: 5vw;
     font-family: Arial, sans-serif;
-    background-color: rgb(146, 145, 145);
+    background-color: hsl(0, 0%, 57%);
 
 }
 .features{
     display: flex;
     gap: 1em;
-    justify-content: left;
     align-items: center;
     margin-bottom: 1em;
+    background-color: hsl(0, 0%, 37%);
+    padding: .5em;
+    border-radius: 10px;
+}
+.page-info{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 2em;
+    border-radius: 8px;
+    margin-bottom: 1em;
+    background-color:  hsl(0, 0%, 67%);
+}
+
+.nav-page{
+    background-color: #c3dae0e7 ;
+    padding: .5em;
+    color: hsl(0, 0%, 37%);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.page-num{
+
+    color: white;
+
 }
 .container{
     margin: auto;
@@ -28,7 +53,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: .5em;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     border : 1px solid #ccc;
     width: 70%;   
     margin: auto;
@@ -39,7 +65,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 150px;
+    width: 200px;
     min-height: 150px;
     max-height: 250px;
     justify-content: space-evenly;
@@ -187,8 +213,9 @@ body {
 }
 
 .sort-dir{
-    width: 30px;
-    height: 30px;
+    display: flex;
+    gap: 1em;
+ 
 }
 .book-dialog-title{
     text-align: center;

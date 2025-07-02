@@ -10,34 +10,50 @@
         
             <h1 class="main-header">Book Shop</h1>
 
+            <div class="page-info">
+                <button class="nav-page" onclick="onPrevPage()">Prev Page</button>
+                <div class="page-num">Page: <span></span></div>
+                <button class="nav-page" onclick="onNextPage()">Next Page</button>
+           </div>
+
+
             <div class="features">
                 <div class="filter">
                     <button onclick="onResetSearch()">Reset Search</button>
-                    <input class="input-title" placeholder="Search for a book..." oninput="onSearch(this)">
+                    <input class="input-title" placeholder="Search for a book..." oninput="onSearch()">
                 </div>
                 <label for="input">Select Rating:
-                    <input class="input-rating" type="range" min=0 max=5 value=0 oninput="onSearch(this)"></input>
+                    <input class="input-rating" type="range" min=0 max=5 value=0 oninput="onSearch()"></input>
                 </label>
-                <label for="select">Sort by:
-                    <select class="sort" onchange="onSortBy()">
-                        <option value="all">All</option>
-                        <option value="title">Title</option>
-                        <option value="rating">Rating</option>
-                        <option value="price">Price</option>
-                    </select>
+                <div class="sort-dir">
 
-                    <span>Deccending</span>
-                    <input class="sort-dir" type="checkbox" oninput="onSortBy()" >
-                    
+                    <label for="select">Sort by:
+                        <select class="sort" onchange="onSortBy()">
+                            <option value="all">All</option>
+                            <option value="title">Title</option>
+                            <option value="rating">Rating</option>
+                            <option value="price">Price</option>
+                        </select>
+                   </label>     
 
-                </label>
+                            <label>
+                                Accending
+                                <input class="sort-dir-acc" type="radio" name="sort-dir" oninput="onSortBy()">
+                                
+                            </label>
+                            <label>
+                                Deccending
+                                <input class="sort-dir-decc" type="radio" name="sort-dir" oninput="onSortBy()">
+                                
+                            </label>
+                </div>
+
                 <button class="add-book" onclick="onAddBook()">Add Book</button>
             </div>
 
             <div class="container">
                 <div class="book-cards"></div> 
             </div>
-
             <div class="footer">
                 <p class="footer-text">Book Shop - All rights reserved &copy; 2025</p>
                 <div class="footer-stats">
