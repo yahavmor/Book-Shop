@@ -1,25 +1,182 @@
+
+
+
+
 'use strict';
 
 function getBooksDB(){
 
-    return [
-        {id: 'bj59300', title: '1984', price: 14,rating:getRandInt(1,6),imgUrl:'img/1984.jpg',content: 'A dystopian novel by George Orwell, published in 1949. It is set in a totalitarian society ruled by Big Brother.'},
-        {id: 'bj59301', title: 'To Kill a Mockingbird', price: 12,rating:getRandInt(1,6),imgUrl:'img/the adventarus of lori ipsi.jpg',content: 'A novel by Harper Lee published in 1960. It is a coming-of-age story set in the American South during the 1930s.'},
-        {id: 'bj59302', title: 'The Great Gatsby', price: 10,rating:getRandInt(1,6),imgUrl:'img/zorba the greek.jpg',content: 'A novel by F. Scott Fitzgerald published in 1925. It is set in the Jazz Age and tells the story of Jay Gatsby and his unrequited love for Daisy Buchanan.'},
-        {id: 'bj59303', title: '984', price: 14,rating:getRandInt(1,6),imgUrl:'img/1984.jpg',content: 'A dystopian novel by George Orwell, published in 1949. It is set in a totalitarian society ruled by Big Brother.'},
-        {id: 'bj59304', title: 'Kill a Mockingbird', price: 12,rating:getRandInt(1,6),imgUrl:'img/the adventarus of lori ipsi.jpg',content: 'A novel by Harper Lee published in 1960. It is a coming-of-age story set in the American South during the 1930s.'},
-        {id: 'bj59305', title: 'Great Gatsby', price: 10,rating:getRandInt(1,6),imgUrl:'img/zorba the greek.jpg',content: 'A novel by F. Scott Fitzgerald published in 1925. It is set in the Jazz Age and tells the story of Jay Gatsby and his unrequited love for Daisy Buchanan.'},
-        {id: 'bj59306', title: '4', price: 14,rating:getRandInt(1,6),imgUrl:'img/1984.jpg',content: 'A dystopian novel by George Orwell, published in 1949. It is set in a totalitarian society ruled by Big Brother.'},
-        {id: 'bj59307', title: 'a Mockingbird', price: 12,rating:getRandInt(1,6),imgUrl:'img/the adventarus of lori ipsi.jpg',content: 'A novel by Harper Lee published in 1960. It is a coming-of-age story set in the American South during the 1930s.'},
-        {id: 'bj59308', title: 'reat Gatsby', price: 10,rating:getRandInt(1,6),imgUrl:'img/zorba the greek.jpg',content: 'A novel by F. Scott Fitzgerald published in 1925. It is set in the Jazz Age and tells the story of Jay Gatsby and his unrequited love for Daisy Buchanan.'},
-        {id: 'bj59309', title: '84', price: 14,rating:getRandInt(1,6),imgUrl:'img/1984.jpg',content: 'A dystopian novel by George Orwell, published in 1949. It is set in a totalitarian society ruled by Big Brother.'},
-        {id: 'bj59310', title: 'Mockingbird', price: 12,rating:getRandInt(1,6),imgUrl:'img/the adventarus of lori ipsi.jpg',content: 'A novel by Harper Lee published in 1960. It is a coming-of-age story set in the American South during the 1930s.'},
-        {id: 'bj59311', title: 'Gatsby', price: 10,rating:getRandInt(1,6),imgUrl:'img/zorba the greek.jpg',content: 'A novel by F. Scott Fitzgerald published in 1925. It is set in the Jazz Age and tells the story of Jay Gatsby and his unrequited love for Daisy Buchanan.'}
-    ]
+   return [
+        {
+          id: makeId(), 
+          title: "1984",
+          price: 251.3,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780141036144-L.jpg",
+          description: "A dystopian novel by George Orwell."
+        },
+        {
+          id: makeId() ,
+          title: "To Kill a Mockingbird",
+          price: 23.6,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780061120084-L.jpg",
+          description: "A novel by Harper Lee set in the American South."
+        },
+        {
+          id: makeId() ,
+          title: "The Great Gatsby",
+          price: 196.67,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg",
+          description: "A story of Jay Gatsby and his love for Daisy."
+        },
+        {
+          id: makeId(),
+          title: "Brave New World",
+          price: 344.7,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780060850524-L.jpg",
+          description: "A futuristic society novel by Aldous Huxley."
+        },
+        {
+          id: makeId() ,
+          title: "Moby Dick",
+          price: 241.76,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9781503280786-L.jpg",
+          description: "The epic tale of Captain Ahab and the white whale."
+        },
+        {
+          id: makeId() ,
+          title: "Pride and Prejudice",
+          price: 186.57,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780141439518-L.jpg",
+          description: "A romantic novel by Jane Austen."
+        },
+        {
+          id: makeId() ,
+          title: "The Catcher in the Rye",
+          price: 226.78,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780316769488-L.jpg",
+          description: "Holden Caulfield’s journey through New York."
+        },
+        {
+          id: makeId(),
+          title: "Fahrenheit 451",
+          price: 265.0,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9781451673319-L.jpg",
+          description: "A dystopian novel about book burning."
+        },
+        {
+          id: makeId(),
+          title: "Jane Eyre",
+          price: 416.27,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780141441146-L.jpg",
+          description: "A gothic romance by Charlotte Brontë."
+        },
+        {
+          id: makeId(),
+          title: "Animal Farm",
+          price: 314.5,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780451526342-L.jpg",
+          description: "A political allegory by George Orwell."
+        },
+        {
+          id: makeId(),
+          title: "The Hobbit",
+          price: 493.1,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg",
+          description: "Bilbo Baggins’ adventure in Middle-earth."
+        },
+        {
+          id: makeId(),
+          title: "War and Peace",
+          price: 270.0,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780199232765-L.jpg",
+          description: "A historical epic by Leo Tolstoy."
+        },
+        {
+          id: makeId(),
+          title: "Crime and Punishment",
+          price: 236.7,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780140449136-L.jpg",
+          description: "A psychological novel by Dostoevsky."
+        },
+        {
+          id: makeId(),
+          title: "The Odyssey",
+          price: 267.7,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780140268867-L.jpg",
+          description: "Homer’s epic journey of Odysseus."
+        },
+        {
+          id: makeId(),
+          title: "Les Misérables",
+          price: 419.5,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780451419439-L.jpg",
+          description: "Victor Hugo’s tale of redemption."
+        },
+        {
+          id: makeId(),
+          title: "The Brothers Karamazov",
+          price: 337.19,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780374528379-L.jpg",
+          description: "A philosophical novel by Dostoevsky."
+        },
+        {
+          id: makeId(),
+          title: "Wuthering Heights",
+          price: 133.1,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780141439556-L.jpg",
+          description: "A tragic love story by Emily Brontë."
+        },
+        {
+          id: makeId(),
+          title: "Dracula",
+          price: 48.26,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780486411095-L.jpg",
+          description: "The classic vampire novel by Bram Stoker."
+        },
+        {
+          id: makeId(),
+          title: "Frankenstein",
+          price: 190.67,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780486282114-L.jpg",
+          description: "Mary Shelley’s tale of science and horror."
+        },
+        {
+          id: makeId(),
+          title: "The Divine Comedy",
+          price: 296.9,
+          rating: getRandInt(1,6),
+          imgUrl: "https://covers.openlibrary.org/b/isbn/9780140448955-L.jpg",
+          description: "Dante’s journey through Hell, Purgatory, and Paradise."
+        }
+      ];
+      
+  
+      
+      
+    
 }
 function createBook(title, price, rating, imgUrl) {
     const book = {
-        id: makeId(),
+        id: makeId() ,
         title,
         price: +price,
         imgUrl,
@@ -42,12 +199,14 @@ function readBook(bookId) {
 
     elContent.innerHTML = `
         <h2 class="book-dialog-title">${book.title}</h2>
+        <div class="dialog-body">    
         <img class="book-dialog-img" src="${book.imgUrl}" />
+        <div class="dialog-stats">
+        <p class="book-dialog-rating">Rating:  ${'⭐'.repeat(book.rating)} </p>
         <p class="book-dialog-price">Price: ${book.price}$</p>
-        <p class="book-dialog-txt">${book.content}</p>
-        <p class="book-dialog-rating">Rating: ${book.rating} stars</p>`;
-        
-
+        </div>
+        </div>
+        <p class="book-dialog-txt">${book.description}</p>`
     elModal.showModal();
 }
 
@@ -97,15 +256,15 @@ function showPageNumber(){
 
 function printBook(book){
     return `
-                <div class="book-card">
+                <div class="book-card" onClick="onReadBook('${book.id}')">
                 <div class="book-card-title">${book.title}</div>
                 <img src="${book.imgUrl}"  class="book-card-img" />
                 <div class="book-card-price">Price:${book.price} $</div>
                 <div class="book-card-rating">Rating: ${'⭐'.repeat(book.rating)}</div>
                 <div class="book-card-actions">
                 <button class="action read" onclick="onReadBook('${book.id}')">Read</button>
-                <button class="action update" onclick="onUpdateBook('${book.id}')">Update</button>
-                <button class="action delete" onclick="onRemoveBook('${book.id}')">Delete</button>
+                <button class="action update" onclick="event.stopPropagation() ;onUpdateBook('${book.id}')">Update</button>
+                <button class="action delete" onclick="event.stopPropagation() ;onRemoveBook('${book.id}')">Delete</button>
                 </div>
             </div>`;
 }
@@ -117,3 +276,50 @@ function sliceBooks(){
     gQueryOptions.gPage.totalPages = Math.ceil(books.length / gQueryOptions.gPage.limit )  
     return books.slice(startIdx,endIdx)
 }
+
+
+function renderBooksTable(books) {
+    const elTableBody = document.querySelector('.book-list');
+    if (!books.length) {
+        elTableBody.innerHTML = `<tr><td>No Matching Books Were Found...</td></tr>`;
+        return;
+    }
+
+    const strHTMLs = books.map(book => `
+        <tr>
+            <td>${book.title}</td>
+            <td>${book.price} $</td>
+            <td>${'⭐'.repeat(book.rating)}</td>
+            <td>
+                <button class="action read" onclick="onReadBook('${book.id}')">Read</button>
+                <button class="action update" onclick="onUpdateBook('${book.id}')">Update</button>
+                <button class="action delete" onclick="onRemoveBook('${book.id}')">Delete</button>
+            </td>
+        </tr>
+    `);
+    elTableBody.innerHTML = strHTMLs.join('');
+}
+
+
+
+
+'use strict';
+
+function getRandInt(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+function makeId(){
+    var text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < 6; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+}
+
+function findBookById(bookId){
+    return gBooks.find(book => book.id === bookId);
+}
+
+

@@ -1,59 +1,70 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Book Shop</title>
-        <link rel="stylesheet" href="css/styles.css">
-    </head>
-    <body onload="onInit()" onsubmit="">
-        
-            <h1 class="main-header">Book Shop</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Shop</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body onload="onInit()" onsubmit="">
+    
+        <h1 class="main-header">Book Shop</h1>
 
-            <div class="page-info">
-                <button class="nav-page" onclick="onPrevPage()">Prev Page</button>
-                <div class="page-num">Page: <span></span></div>
-                <button class="nav-page" onclick="onNextPage()">Next Page</button>
-           </div>
+        <div class="page-info">
+            <button class="nav-page" onclick="onPrevPage()">Prev Page</button>
+            <div class="page-num">Page: <span></span></div>
+            <button class="nav-page" onclick="onNextPage()">Next Page</button>
+       </div>
 
 
-            <div class="features">
-                <div class="filter">
-                    <button onclick="onResetSearch()">Reset Search</button>
-                    <input class="input-title" placeholder="Search for a book..." oninput="onSearch()">
-                </div>
-                <label for="input">Select Rating:
-                    <input class="input-rating" type="range" min=0 max=5 value=0 oninput="onSearch()"></input>
-                </label>
-                <div class="sort-dir">
+        <div class="features">
+            <div class="filter">
+                <button onclick="onResetSearch()">Reset Search</button>
+                <input class="input-title" placeholder="Search for a book..." oninput="onSearch()">
+            </div>
+            <label for="input">Select Rating:
+                <input class="input-rating" type="range" min=0 max=5 value=0 oninput="onSearch()"></input>
+            </label>
+            <div class="sort-dir">
 
-                    <label for="select">Sort by:
-                        <select class="sort" onchange="onSortBy()">
-                            <option value="all">All</option>
-                            <option value="title">Title</option>
-                            <option value="rating">Rating</option>
-                            <option value="price">Price</option>
-                        </select>
-                   </label>     
+                <label for="select">Sort by:
+                    <select class="sort" onchange="onSortBy()">
+                        <option value="all">All</option>
+                        <option value="title">Title</option>
+                        <option value="rating">Rating</option>
+                        <option value="price">Price</option>
+                    </select>
+               </label>     
 
-                            <label>
-                                Accending
-                                <input class="sort-dir-acc" type="radio" name="sort-dir" oninput="onSortBy()">
-                                
-                            </label>
-                            <label>
-                                Deccending
-                                <input class="sort-dir-decc" type="radio" name="sort-dir" oninput="onSortBy()">
-                                
-                            </label>
-                </div>
-
-                <button class="add-book" onclick="onAddBook()">Add Book</button>
+                        <label>
+                            Accending
+                            <input class="sort-dir-acc" type="radio" name="sort-dir" oninput="onSortBy()">
+                            
+                        </label>
+                        <label>
+                            Deccending
+                            <input class="sort-dir-decc" type="radio" name="sort-dir" oninput="onSortBy()">
+                            
+                        </label>
             </div>
 
-            <div class="container">
-                <div class="book-cards"></div> 
-            </div>
+            <button class="add-book" onclick="onAddBook()">Add Book</button>
+        </div>
+        <button class="display-button" onclick="onTable()">Change Display</button>
+
+        <div class="container">
+            <table class="book-table hidden">
+                <tr class="header">
+                    <th  onclick="onSort(this)">Title</th>
+                    <th  onclick="onSort(this)">Price</th>
+                    <th  onclick="onSort(this)">Rating</th>
+                    <th>Actions</th>
+                </tr>
+                <tbody class="book-list">
+                </tbody>
+            </table>
+            <div class="book-cards"></div> 
+
             <div class="footer">
                 <p class="footer-text">Book Shop - All rights reserved &copy; 2025</p>
                 <div class="footer-stats">
@@ -63,41 +74,47 @@
                 </div>
             </div>
 
-        <dialog class="book-details-modal">
-            <form method="dialog">
-                <h2 class="dialog-header">More Details About The Book</h2>
-                <div class="dialog-content"></div>    
-                
-                <button class="close-modal">X</button>
-            </form>
-        </dialog>
-
-        <dialog class="book-edit-modal">
-            <form onsubmit="onSaveBook()" method="dialog">
-                <h2><span></span> Book</h2>
-                <img src="" alt="">
-                <input type="text" placeholder="Book Name" class="book-name-input">
-                <input type="text" placeholder="Book Price" class="book-price-input">
-                <input type="text" placeholder="Book Rating" class="book-rating-input">
-                <div class="actions">
-                    <button type="button" onclick="onCloseBookEditModal()">Cancel</button>
-                    <button>Save</button>
-                </div>
-            </form>
-        </dialog>
-
-
-
-        <div class="message-modal hidden">
-                <p class="message-text"><span class="success-txt">Success</span>  <span2></span2></p>
+            
         </div>
 
+        
+        
+
+    <dialog class="book-details-modal">
+        <form method="dialog">
+            <h2 class="dialog-header">More Details About The Book</h2>
+            <div class="dialog-content"></div>    
+            
+            <button class="close-modal">X</button>
+        </form>
+    </dialog>
+
+    <dialog class="book-edit-modal">
+        <form onsubmit="onSaveBook()" method="dialog">
+            <h2><span></span> Book</h2>
+            <img src="" alt="">
+            <input type="text" placeholder="Book Name" class="book-name-input">
+            <input type="text" placeholder="Book Price" class="book-price-input">
+            <input type="text" placeholder="Book Rating" class="book-rating-input">
+            <div class="actions">
+                <button type="button" onclick="onCloseBookEditModal()">Cancel</button>
+                <button>Save</button>
+            </div>
+        </form>
+    </dialog>
 
 
-        <script src="js/book.service.js"></script>
-        <script src="js/book.controller.js"></script>
-        <script src="js/local,storage.js"></script>
-        <script src="js/utils.js"></script>
 
-    </body>
-    </html>
+    <div class="message-modal hidden">
+            <p class="message-text"><span class="success-txt">Success</span>  <span2></span2></p>
+    </div>
+
+
+
+    <script src="js/book.service.js"></script>
+    <script src="js/book.controller.js"></script>
+    <script src="js/local,storage.js"></script>
+    <script src="js/utils.js"></script>
+
+</body>
+</html>

@@ -7,11 +7,12 @@ var gAverageBooksCount = 0;
 var gCheapBooksCount = 0;
 var gBookToEditId = null
 const STORAGE_KEY = 'booksDb'
+var isTable = false
 
 var gQueryOptions ={
     gFilterBy:{filterTitle:null,filterRating:null},
     gSortBy:{option:'all',dir:true},
-    gPage:{idx:0,limit:3,totalPages:null}
+    gPage:{idx:0,limit:4,totalPages:null}
 }
 
  
@@ -29,19 +30,23 @@ function initBooks(){
     }
 }
 
-function renderBooks(){
-    var strHTMLs = '';
-    const elBooks = document.querySelector('.book-cards');
-    showPageNumber()
-    var books = getBooks()
-    if(!books.length) elBooks.innerHTML = noMatch() 
-    else {
-        books = sortBy(books)
-        strHTMLs = books.map(book =>printBook(book));
-        elBooks.innerHTML = strHTMLs.join('');
+function renderBooks() {
+    const books = sortBy(getBooks());
+    showPageNumber();
+    showStats();
+
+    if (isTable) {
+        renderBooksTable(books);
+    } else {
+        const elCards = document.querySelector('.book-cards');
+        if (!books.length) elCards.innerHTML = `<p class="empty-table-message">No Matching Books Were Found....</p>`;
+        else {
+            const strHTMLs = books.map(book => printBook(book));
+            elCards.innerHTML = strHTMLs.join('');
+        }
     }
-    showStats()
 }
+
 
 function onReadBook(bookId){
     readBook(bookId);
@@ -200,4 +205,23 @@ function getInputValueRating(){
 }
 function noMatch(){
     return `<p class="empty-table-message">No Matching Books Were Found....</p>`;
+}
+
+function onTable(){
+    isTable = !isTable
+    const elBookCards = document.querySelector('.book-cards')
+    const elBookTable = document.querySelector('.book-table')
+    if(isTable){
+        elBookCards.classList.add('hidden')
+        elBookTable.classList.remove('hidden')
+    }else{
+        elBookCards.classList.remove('hidden')
+        elBookTable.classList.add('hidden')
+    }
+    renderBooks()
+}
+function onSort(elSort){
+    var sortBy = elSort.innerHTML.toLowerCase()
+    gQueryOptions.gSortBy.option = sortBy
+    renderBooks()
 }
