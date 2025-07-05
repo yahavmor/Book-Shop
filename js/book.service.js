@@ -1,7 +1,3 @@
-
-
-
-
 'use strict';
 
 function getBooksDB(){
@@ -180,7 +176,7 @@ function createBook(title, price, rating, imgUrl) {
         title,
         price: +price,
         imgUrl,
-        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         rating
     };      
     gBooks.unshift(book);
@@ -298,28 +294,48 @@ function renderBooksTable(books) {
         </tr>
     `);
     elTableBody.innerHTML = strHTMLs.join('');
+    setQueryParams()
 }
 
+function setQueryParams(){
+    const queryParams = new URLSearchParams()
+    if(gQueryOptions.gFilterBy.filterTitle) queryParams.set('title',gQueryOptions.gFilterBy.filterTitle)
+    if(gQueryOptions.gFilterBy.filterRating) queryParams.set('rating',gQueryOptions.gFilterBy.filterRating)
+    if(gQueryOptions.gPage.idx) queryParams.set('page',gQueryOptions.gPage.idx)
+    if(gQueryOptions.gSortBy.option) queryParams.set('option',gQueryOptions.gSortBy.option)    
+    if(gQueryOptions.gSortBy.dir) queryParams.set('dir',gQueryOptions.gSortBy.dir)  
+    const newURL = 
+    window.location.protocol + '//' + 
+    window.location.host + 
+    window.location.pathname + '?' +  queryParams.toString()
 
+    window.history.pushState({path:newURL},'', newURL)
+}
+function getQueryParams() {
+    const queryParams = new URLSearchParams(window.location.search);
 
+    const filterTitle = queryParams.get('title');
+    const filterRating = queryParams.get('rating');
+    const pageIdx = queryParams.get('page');
+    const sortOption = queryParams.get('option');
+    const sortDir = queryParams.get('dir');
 
-'use strict';
+    gQueryOptions.gFilterBy.filterTitle = filterTitle || '';
+    gQueryOptions.gFilterBy.filterRating = +filterRating || 0;
+    gQueryOptions.gPage.idx = +pageIdx || 0;
+    gQueryOptions.gSortBy.option = sortOption || 'all';
+    gQueryOptions.gSortBy.dir = sortDir === 'false' ? false : true; // because URL param is string
 
-function getRandInt(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
+    renderQueryParams();
 }
 
-function makeId(){
-    var text = '';
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (var i = 0; i < 6; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
+function renderQueryParams(){
+    document.querySelector('.input-title').value = gQueryOptions.gFilterBy.filterTitle
+    document.querySelector('.input-rating').value = gQueryOptions.gFilterBy.filterRating
+    document.querySelector('.sort').value = gQueryOptions.gSortBy.option
+    document.querySelector('.sort-dir-decc').innerHTML = gQueryOptions.gSortBy.dir
+    document.querySelector('.page-num').querySelector('span').innerHTML = gQueryOptions.gPage.idx+1
 }
 
-function findBookById(bookId){
-    return gBooks.find(book => book.id === bookId);
-}
 
 

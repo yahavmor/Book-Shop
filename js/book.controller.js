@@ -20,6 +20,7 @@ var gQueryOptions ={
 
 function onInit(){
     initBooks();
+    getQueryParams()
     renderBooks()
 }
 function initBooks(){
@@ -45,6 +46,7 @@ function renderBooks() {
             elCards.innerHTML = strHTMLs.join('');
         }
     }
+    setQueryParams()
 }
 
 
@@ -157,7 +159,6 @@ function onSortBy(){
 function onCloseBookEditModal(){
     
     const elModal = document.querySelector('.book-edit-modal')
-    isAddMode ? clearTextInput() : null
     elModal.close()
 }
 
