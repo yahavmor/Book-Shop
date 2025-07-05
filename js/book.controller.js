@@ -12,7 +12,7 @@ var isTable = false
 var gQueryOptions ={
     gFilterBy:{filterTitle:null,filterRating:null},
     gSortBy:{option:'all',dir:true},
-    gPage:{idx:0,limit:4,totalPages:null}
+    gPage:{idx:0,limit:5,totalPages:null}
 }
 
  
@@ -20,6 +20,7 @@ var gQueryOptions ={
 
 function onInit(){
     initBooks();
+    getQueryParams()
     renderBooks()
 }
 function initBooks(){
@@ -45,6 +46,7 @@ function renderBooks() {
             elCards.innerHTML = strHTMLs.join('');
         }
     }
+    setQueryParams()
 }
 
 
@@ -157,7 +159,6 @@ function onSortBy(){
 function onCloseBookEditModal(){
     
     const elModal = document.querySelector('.book-edit-modal')
-    isAddMode ? clearTextInput() : null
     elModal.close()
 }
 
